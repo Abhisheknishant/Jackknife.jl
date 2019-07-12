@@ -2,7 +2,7 @@
 language: julia
 os:
   - windows
-arch: x86
+arch: x64
 julia:
   - 1.0
   - 1.1
