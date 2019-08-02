@@ -1,5 +1,5 @@
 # Documentation: http://docs.travis-ci.com/user/languages/julia/
-language: generic
+language: shell
 os:
   - windows
 arch: x64
