@@ -15,6 +15,7 @@ script:
   - ls
   - ls /c
   - ls ${TRAVIS_HOME}
+  - ls /
 notifications:
   email: false
 # uncomment the following lines to override the default test script
