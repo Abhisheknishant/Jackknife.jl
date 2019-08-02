@@ -12,15 +12,10 @@ script:
   - curl -A "$CURL_USER_AGENT" -s -L --retry 7 -o julia-installer.exe https://julialang-s3.julialang.org/bin/winnt/x64/1.0/julia-1.0-latest-win64.exe
   - chmod +x julia-installer.exe
   - powershell -c 'Start-Process -FilePath julia-installer.exe -ArgumentList "/S /D=C:\julia" -NoNewWindow -Wait'
-  - |
-      if [ ! -d "/c/julia" ]; then
-        powershell -c 'Start-Process -FilePath julia-installer.exe -ArgumentList "/S /D=//c//julia" -NoNewWindow -Wait'
-      else
-        echo "IT WORKED?"
-      fi
-  - ls /c
-  - ls ${TRAVIS_HOME}
-  - ls /
+  - echo $(which julia)
+  - export PATH=${PATH}:/c/julia/bin
+  - echo $(which julia)
+  - julia -e 'using InteractiveUtils; versioninfo()'
 notifications:
   email: false
 # uncomment the following lines to override the default test script
