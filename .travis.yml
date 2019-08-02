@@ -1,13 +1,20 @@
 # Documentation: http://docs.travis-ci.com/user/languages/julia/
-language: julia
+language: shell
 os:
   - windows
 arch: x64
-julia:
-  - 1.0
-  - 1.1
-  - 1.2
-  - nightly
+#julia:
+#  - 1.0
+#  - 1.1
+#  - 1.2
+#  - nightly
+script:
+  - curl -A "$CURL_USER_AGENT" -s -L --retry 7 -o julia-installer.exe https://julialang-s3.julialang.org/bin/winnt/x64/1.0/julia-1.0-latest-win64.exe
+  - chmod +x julia-installer.exe
+  - powershell -c 'Start-Process -FilePath julia-installer.exe -ArgumentList "/S /D=C:/julia" -NoNewWindow -Wait'
+  - ls
+  - ls /c
+  - ls ${TRAVIS_HOME}
 notifications:
   email: false
 # uncomment the following lines to override the default test script
