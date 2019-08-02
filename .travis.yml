@@ -10,7 +10,7 @@ arch: x64
 #  - nightly
 before_install:
   - echo ${PATH}
-  - echo $(which pwsh)
+  - echo $(which powershell)
   - ls /c
 notifications:
   email: false
