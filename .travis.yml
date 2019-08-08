@@ -10,6 +10,9 @@ os:
 script:
   - mkdir -p ${TRAVIS_HOME}/julia
   - curl -s -L --retry 7 'https://julialang-s3.julialang.org/bin/linux/x86/1.0/julia-1.0-latest-linux-i686.tar.gz' | tar -C ${TRAVIS_HOME}/julia -x -z --strip-components=1 -f -
+  - ls ${TRAVIS_HOME}
+  - ls ${TRAVIS_HOME}/julia
+  - ls ${TRAVIS_HOME}/julia/bin
   - export PATH="${PATH}:${TRAVIS_HOME}/julia/bin"
   - julia --color=yes -e 'using InteractiveUtils; versioninfo()'
   - julia --color=yes --project=. -e 'using Pkg; Pkg.build()'
