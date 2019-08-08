@@ -8,6 +8,13 @@ os:
 #  - 1.1
 #  - nightly
 script:
+  - |
+      if [ "${TRAVIS_DIST}" = "precise" ]; then
+        sudo sh -c 'echo "foreign-architecture i386" > /etc/dpkg/dpkg.cfg.d/multiarch'
+      else
+        sudo dpkg --add-architecture i386
+      fi
+  - sudo apt-get update
   - mkdir -p ${TRAVIS_HOME}/julia
   - curl -s -L --retry 7 'https://julialang-s3.julialang.org/bin/linux/x86/1.0/julia-1.0-latest-linux-i686.tar.gz' | tar -C ${TRAVIS_HOME}/julia -x -z --strip-components=1 -f -
   - ls ${TRAVIS_HOME}
