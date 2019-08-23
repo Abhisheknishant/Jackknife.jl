@@ -1,13 +1,16 @@
-language: julia
-os:
-  - linux
-  - osx
-  - windows
-julia:
-  - 1.0
-  - 1.1
-  - nightly
+language: shell
+os: freebsd
+dist: freebsd
+script:
+  - mkdir -p ${TRAVIS_HOME}/julia
+  - curl -s -L --retry 7 'https://julialang-s3.julialang.org/bin/freebsd/x64/1.0/julia-1.0-latest-freebsd-x86_64.tar.gz' | tar -C ${TRAVIS_HOME}/julia -x -z --strip-components=1 -f -
+  - ls ${TRAVIS_HOME}
+  - ls ${TRAVIS_HOME}/julia
+  - ls ${TRAVIS_HOME}/julia/bin
+  - ldd ${TRAVIS_HOME}/julia/bin/julia
+  - export PATH="${PATH}:${TRAVIS_HOME}/julia/bin"
+  - julia --color=yes -e 'using InteractiveUtils; versioninfo(verbose=true)'
+  - julia --color=yes --project=. -e 'using Pkg; Pkg.build()'
+  - julia --color=yes --project=. -e 'using Pkg; Pkg.test()'
 notifications:
   email: false
-after_success:
-  - julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())';
