@@ -3,6 +3,9 @@ os:
   - linux
   - osx
   - windows
+arch:
+    - amd64
+    - arm64
 julia:
   - 1.0
   - 1.1
